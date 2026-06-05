@@ -202,37 +202,221 @@
 
 
 // Example:3
-const p1 = new Promise((resolve, reject) => {
-  let condition1 = true
-  setTimeout(() => {
-    if (condition1) {
-      return resolve("First")
-    } else {
-      return reject("Fail First")
-    }
-  }, 2000)
-}
+// const p1 = new Promise((resolve, reject) => {
+//   let condition1 = true
+//   setTimeout(() => {
+//     if (condition1) {
+//       return resolve("First")
+//     } else {
+//       return reject("Fail First")
+//     }
+//   }, 2000)
+// }
 
-);
+// );
 
-const p2 = new Promise((resolve, reject) => {
-  let condition2 = false
-  setTimeout(() => {
-    if (condition2) {
-      return resolve("Second")
-    } else {
-      return reject("Fail Second")
-    }
-  }, 2000)
-}
-);
+// const p2 = new Promise((resolve, reject) => {
+//   let condition2 = false
+//   setTimeout(() => {
+//     if (condition2) {
+//       return resolve("Second")
+//     } else {
+//       return reject("Fail Second")
+//     }
+//   }, 2000)
+// }
+// );
 
 
-Promise.race([p1, p2])
-  .then((result)=>{
-    console.log(result);
-  }).catch((error)=>{
-     console.log(error);
-  });
+// Promise.race([p1, p2])
+//   .then((result) => {
+//     console.log(result);
+//   }).catch((error) => {
+//     console.log(error);
+//   });
 
-  // output:fIRST
+// output:fIRST
+
+
+//Promise.allSettled()
+//Case 1: All Promises Resolved
+
+// const p1 = Promise.resolve("HTML");
+// const p2 = Promise.resolve("CSS");
+// const p3 = Promise.resolve("JavaScript");
+
+// Promise.allSettled([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   });
+// output:
+// [
+//   { status: "fulfilled", value: "HTML" },
+//   { status: "fulfilled", value: "CSS" },
+//   { status: "fulfilled", value: "JavaScript" }
+// ]
+
+
+// Case 2: All Promises Rejected
+// const p1 = Promise.reject("API Error");
+// const p2 = Promise.reject("Network Error");
+// const p3 = Promise.reject("Server Error");
+
+// Promise.allSettled([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   });
+// output:
+// [
+//   { status: "rejected", reason: "API Error" },
+//   { status: "rejected", reason: "Network Error" },
+//   { status: "rejected", reason: "Server Error" }
+// ]
+
+// Case 3: Some Resolved and Some Rejected
+// const p1 = Promise.resolve("Data Loaded");
+// const p2 = Promise.reject("API Failed");
+// const p3 = Promise.resolve("User Found");
+
+// Promise.allSettled([])
+//   .then((result) => {
+//     console.log(result);
+//   });
+// output:
+// [
+//   { status: "fulfilled", value: "Data Loaded" },
+//   { status: "rejected", reason: "API Failed" },
+//   { status: "fulfilled", value: "User Found" }
+// ]
+
+// Promise.any()
+// case-1 First Promise Resolved
+// const p1 = Promise.resolve("HTML");
+// const p2 = Promise.resolve("CSS");
+// const p3 = Promise.resolve("JavaScript");
+
+// Promise.any([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+//   output:HTML
+
+// Case 2: Some Rejected and One Resolved
+// const p1 = Promise.reject("API Failed");
+// const p2 = Promise.reject("Server Failed");
+// const p3 = Promise.resolve("Data Loaded");
+
+// Promise.any([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+//   output:Data Loaded
+
+// Case 3: All Promises Rejected
+
+// const p1 = Promise.reject("API Error");
+// const p2 = Promise.reject("Network Error");
+// const p3 = Promise.reject("Server Error");
+
+// Promise.any([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//     console.log(error.errors);
+//   });
+
+// output:
+// AggregateError: All promises were rejected
+
+// ["API Error", "Network Error", "Server Error"]
+
+
+
+// Case 4: Fastest Promise Wins
+
+// const p1 = new Promise((resolve) => {
+//   setTimeout(() => resolve("Server 1"), 3000);
+// });
+
+// const p2 = new Promise((resolve) => {
+//   setTimeout(() => resolve("Server 2"), 1000);
+// });
+
+// const p3 = new Promise((resolve) => {
+//   setTimeout(() => resolve("Server 3"), 2000);
+// });
+
+// Promise.any([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   });
+
+//   output:Server 2
+
+// Case 5: Empty Array
+
+// Promise.any([])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+// output: AggregateError: All promises were rejected
+
+
+
+// Case 6: Mix of Delayed Resolve and Reject
+// const p1 = new Promise((resolve, reject) => {
+//   setTimeout(() => reject("Failed 1"), 1000);
+// });
+
+// const p2 = new Promise((resolve) => {
+//   setTimeout(() => resolve("Success 2"), 3000);
+// });
+
+// const p3 = new Promise((resolve, reject) => {
+//   setTimeout(() => reject("Failed 3"), 2000);
+// });
+
+// Promise.any([p1, p2, p3])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+// output:Success 2
+
+// const p1 = new Promise((resolve, reject) => {
+//   setTimeout(() => resolve("Failed 1"), 3000);
+// });
+
+// const p2 = new Promise((resolve) => {
+//   setTimeout(() => resolve("Success 2"), 3000);
+// });
+
+// const p3 = new Promise((resolve, reject) => {
+//   setTimeout(() => resolve("Failed 3"), 3000);
+// });
+
+// Promise.race([p2, p1, p3])
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+  // output:Failed 1
