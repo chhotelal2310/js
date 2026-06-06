@@ -419,4 +419,80 @@
 //     console.log(error);
 //   });
 
-  // output:Failed 1
+// output:Failed 1
+
+/*------------------------------------- async and awit **************************/
+// Example:1
+// async function greet() {
+//   return "Hello";
+// }
+
+// console.log(greet()) ==> Promise { 'Hello' }
+// greet().then((result) => {
+//   console.log(result);==> Hello
+// })
+
+// output:Promise { 'Hello' }
+
+// function greet() {
+//   return Promise.resolve("Hello");
+// }
+
+
+// Example-2
+
+// async function demo() {
+//   console.log("1");
+
+//   await Promise.resolve();
+
+//   console.log("2");
+// }
+
+// demo();
+
+// console.log("3");
+
+// output:1 3 2
+
+
+
+// Example-3
+
+// async function demo() {
+//   const result1 = "1";
+
+//   await Promise.resolve();
+
+//   const result2 = "2";
+
+//   return { result1, result2 };
+// }
+
+//   demo().then((result) => {
+//     console.log(result);
+//   })
+
+// console.log("3");
+
+
+// output:
+// 3
+// { result1: '1', result2: '2' }
+
+// Example-4:
+// async function demo() {
+//   await new Promise(resolve =>
+//     setTimeout(resolve, 3000)
+//   );
+
+//   console.log("Done");
+// }
+
+// demo();
+
+// console.log("Running");
+
+// output:
+// Running
+// Done
