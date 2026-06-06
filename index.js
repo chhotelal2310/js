@@ -497,3 +497,439 @@
 // Running
 // Done
 
+
+
+
+/********************************************** Event loop*********************** */
+// Example-1
+// console.log("Start");
+
+// setTimeout(() => {
+//     console.log("Timeout");
+// }, 0);
+
+// Promise.resolve().then(() => {
+//     console.log("Promise");
+// });
+
+// console.log("End");
+
+// outOut:Start, End, Promise, Timeout
+
+// Example-2
+// async function demo() {
+//     console.log("A");
+//     await Promise.resolve();
+//     console.log("B");
+// }
+// console.log("Start");
+// demo();
+// console.log("End");
+
+// Output: A, END, B
+
+
+// Example-5
+// console.log("1");
+
+// setTimeout(() => {
+//     console.log("2");
+// }, 0);
+
+// Promise.resolve().then(() => {
+//     console.log("3");
+// });
+
+// console.log("4");
+
+// output:1,4, 3, 4
+
+
+
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/***********************************************************************************************************/
+/*************************** micro and marcko task based question ******************************************/
+/*-------------------------------------------------------------BASIC QUESTION----------------------------------------------*/
+// Q.1
+// console.log("A");
+// setTimeout(() => console.log("B"), 0);
+// console.log("C")
+// output:A, C, B
+
+//Q.2
+// console.log("A");
+// Promise.resolve().then(() => console.log("B"));
+// console.log("C");
+// Output: A,C, B
+
+//Q.3
+// setTimeout(() => console.log("A"), 0);
+// Promise.resolve().then(() => console.log("B"));
+// console.log("C");
+//Output:C, B, A
+
+//Q.4
+// console.log("A");
+// setTimeout(() => console.log("B"), 0);
+// Promise.resolve().then(() => console.log("C"));
+// console.log("D");
+//Output: A, D, C, B
+
+
+//Q.5
+// console.log("Start");
+// Promise.resolve().then(() => console.log("Promise"));
+// setTimeout(() => console.log("Timeout"), 0);
+// console.log("End");
+// Output:Start, End, Promise, Timeout
+
+//Q.6
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// });
+// console.log("D");
+// Output:A, D, B, C
+
+//Q.7
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// }, 0);
+// console.log("D");
+// Output:A, D, B, C
+
+//Q.8
+// Promise.resolve().then(() => console.log("A"));
+// Promise.resolve().then(() => console.log("B"));
+// console.log("C");
+// Output:C, A,B
+
+//Q.9
+// setTimeout(() => console.log("A"), 0);
+// setTimeout(() => console.log("B"), 0);
+// Promise.resolve().then(() => console.log("C"));
+// Output:C, A, B
+
+//Q.10
+// console.log("A");
+// (async () => {
+//     console.log("B");
+//     await Promise.resolve();
+//     console.log("C");
+// })();
+// console.log("D");
+// Output:A, B, D, C
+
+// Note:functions are called synchnously, and async functions do not go to queues, micro and macro tasks go.
+// so function will run as it is and executes sync then push micro into microQueue, and macro to macroQueue
+
+/*------------------------------------------------MEDIAM QUESTION----------------------------------------------*/
+//Q.11
+// async function test() {
+//     console.log("A");
+//     await null;
+//     console.log("B");
+// }
+// test();
+// console.log("C");
+
+//Output:A, C, B
+
+// Q.12
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+// }, 0);
+// Promise.resolve().then(() => {
+//     console.log("C");
+// });
+// console.log("D");
+
+// Output: A, D, C, B
+
+
+//Q.13
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// }, 0);
+
+// Promise.resolve().then(() => console.log("D"));
+// Output:A, D, B, C
+
+
+// Q.14
+// Promise.resolve().then(() => {
+//     console.log("A");
+//     setTimeout(() => console.log("B"), 0);
+// });
+// console.log("C");
+// Output:C, A, B
+
+
+//Q.15
+// console.log("A");
+// async function foo() {
+//     console.log("B");
+//     await Promise.resolve();
+//     console.log("C");
+// }
+// foo();
+// console.log("D");
+// Output:A, B, D, C
+
+//Q.16
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+// }).then(() => {
+//     console.log("C");
+// });
+// console.log("D");
+//Output: A, D, B, C
+
+//Q.17
+// console.log("A");
+// setTimeout(() => console.log("B"), 0);
+// Promise.resolve().then(() => {
+//     console.log("C");
+//     setTimeout(() => console.log("D"), 0);
+// });
+// console.log("E");
+
+//Output: A, E, C, B, D
+
+
+//Q.18
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     return Promise.resolve();
+// }).then(() => {
+//     console.log("C");
+// });
+// console.log("D");
+//Output: A, D, B, C
+
+//Q.19
+// console.log("A");
+// async function test() {
+//     console.log("B");
+//     await Promise.resolve();
+//     console.log("C");
+// }
+// test();
+// Promise.resolve().then(() => console.log("D"));
+// Output:A, B, C, D
+
+
+//Q.20
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// }, 0);
+// Promise.resolve().then(() => console.log("D"));
+// console.log("E");
+//Output:A, E, D, B, C
+
+
+//Q.21
+// console.log("A");
+// queueMicrotask(() => console.log("B"));
+// Promise.resolve().then(() => console.log("C"));
+// console.log("D");
+//Output: A, D, B, C
+
+
+//Q.22
+// console.log("A");
+// queueMicrotask(() => {
+//     console.log("B");
+//     queueMicrotask(() => console.log("C"));
+// });
+// console.log("D");
+// Output:A, D, B, C
+
+
+//Q.23
+// console.log("A");
+// setTimeout(() => console.log("B"), 0);
+// queueMicrotask(() => console.log("C"));
+// console.log("D");
+//Output: A, D, C, B
+
+
+//Q.24
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     setTimeout(() => console.log("C"), 0);
+// });
+// console.log("D");
+//Output: A, D, B, C
+
+
+//Q.25
+// console.log("A");
+// (async () => {
+//     console.log("B");
+//     await null;
+//     console.log("C");
+// })();
+// Promise.resolve().then(() => console.log("D"));
+//Output:A, B, C, D
+
+
+//Q.26
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+//     setTimeout(() => console.log("C"), 0);
+// }, 0);
+// console.log("D");
+//Output: A, D, B, C
+
+//Q.27
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// });
+// console.log("D");
+//Output: A, D, B, C
+
+
+
+//Q.28
+// console.log("A");
+// setTimeout(() => console.log("B"), 0);
+// Promise.resolve().then(() => console.log("C"));
+// setTimeout(() => console.log("D"), 0);
+// console.log("E");
+//Output: A, E, C, B, D
+
+
+//Q.29
+// console.log("A");
+// async function foo() {
+//     console.log("B");
+//     await null;
+//     console.log("C");
+// }
+// foo();
+// console.log("D");
+// Promise.resolve().then(() => console.log("E"));
+//Output: A, B, D, C, E
+
+
+
+//Q.30
+// console.log("A");
+// Promise.resolve()
+//     .then(() => console.log("B"))
+//     .then(() => console.log("C"));
+// setTimeout(() => console.log("D"), 0);
+// console.log("E");
+//Output:A, E, B, C, D
+
+/*----------------------------------------------------ADVANCE QUESTION-----------------------------------*/
+//Q.31
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+//     Promise.resolve().then(() => console.log("C"));
+// }, 0);
+// Promise.resolve().then(() => {
+//     console.log("D");
+// });
+// console.log("E");
+// Output: A, E, D, B, C
+
+
+//Q.32
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+// }, 0);
+// (async () => {
+//     console.log("C");
+//     await null;
+//     console.log("D");
+// })();
+// console.log("E");
+//Output: A, C, E, D, B
+
+
+//Q.33
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     setTimeout(() => console.log("C"), 0);
+// });
+
+// setTimeout(() => console.log("D"), 0);
+//Output: A, B, D, C
+
+// console.log("A");
+
+
+// Q.34
+// (async () => {
+//     console.log("B");
+//     await Promise.resolve();
+//     console.log("C");
+// })();
+// setTimeout(() => console.log("D"), 0);
+// Promise.resolve().then(() => console.log("E"));
+// output:B, C, E, D
+
+
+//Q.35
+// console.log("A");
+// Promise.resolve().then(() => {
+//     console.log("B");
+//     setTimeout(() => {
+//         console.log("C");
+//         Promise.resolve().then(() => console.log("D"));
+//     }, 0);
+// });
+// console.log("E");
+//Output:A, E, B, C,  D
+
+
+//Q.36
+// console.log("A");
+// async function foo() {
+//     console.log("B");
+//     await null;
+//     console.log("C");
+//     await null;
+//     console.log("D");
+// }
+// foo();
+// console.log("E");
+//Output:A, B, E, C, D
+
+
+// Q.37
+// console.log("A");
+// setTimeout(() => {
+//     console.log("B");
+// }, 0);
+
+// Promise.resolve().then(() => {
+//     console.log("C");
+//     setTimeout(() => console.log("D"), 0);
+// });
+// console.log("E");
+// Output: A, E, C, B, D
