@@ -78,3 +78,24 @@ var a;
 
 //second ways calling
 // outer()();
+
+/*------------------------------------- Lexical Scope-----------------------------------------*/
+// Definition: The ability of javascrit engine search the variable in outer scope when variable is not persent in local scope is called lexical scope ot scope chain.
+// Example 1:
+// let a = 0;
+// const test = () => {
+//     a++;
+//     console.log(a);
+// }
+// test();
+
+
+// Example 2:
+// let a = 0;
+// const test = () => {
+//     console.log(a++);
+//     console.log(++a);
+//     a++;
+//     console.log(a);
+// }
+// test();
